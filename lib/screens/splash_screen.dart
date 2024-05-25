@@ -3,15 +3,23 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quran/colors/app_colors.dart';
 import 'package:quran/screens/home_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:quran/widgets/language_flag_widget.dart';
+import 'package:quran/widgets/languages_picker_widget.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var AppLocalizations;
     return Scaffold(
-      backgroundColor: AppColors.background,
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)?.title ?? ''),
+        centerTitle: true,
+        leading: LanguageFlagWidget(),
+        actions: [LanguagePickerWidget()],
+      ),
+      backgroundColor: Color.fromARGB(255, 16, 35, 4),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -21,7 +29,8 @@ class SplashScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  AppLocalizations.of(context)?.greeting('Alfi') ?? 'My Quran',
+                  AppLocalizations.of(context)?.greeting('') ??
+                      'My Quran', //ngambil data dari app_id.arb dll
                   style: GoogleFonts.poppins(
                     color: Color.fromARGB(255, 250, 3, 3),
                     fontWeight: FontWeight.bold,
@@ -30,7 +39,8 @@ class SplashScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'Learn Quran and\nRecite once everyday',
+                  AppLocalizations.of(context)?.invitation_message ??
+                      'My Quran',
                   style:
                       GoogleFonts.poppins(fontSize: 18, color: AppColors.text),
                   textAlign: TextAlign.center,
@@ -63,7 +73,7 @@ class SplashScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 40, vertical: 16),
                             decoration: BoxDecoration(
-                                color: AppColors.orange,
+                                color: Color.fromARGB(255, 251, 133, 83),
                                 borderRadius: BorderRadius.circular(30)),
                             child: Text(
                               'Mulai Yukk',

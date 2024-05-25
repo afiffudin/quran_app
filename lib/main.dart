@@ -12,7 +12,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; //harus di view-co
 import 'package:provider/provider.dart';
 import 'package:quran/provider/language_provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const MyApp());
 }
 
@@ -25,14 +30,26 @@ class MyApp extends StatelessWidget {
 
     return ChangeNotifierProvider(
       create: (_) => LanguageProvider(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        locale: Provider.of<LanguageProvider>(context).locale,
-        supportedLocales: L10n.all,
-        theme: ThemeData(primarySwatch: Colors.blue),
-        debugShowCheckedModeBanner: false,
-        home: const SplashScreen(),
-      ),
+      builder: (context, child) {
+        return MaterialApp(
+          title: AppLocalizations.of(context)?.title ?? '',
+          locale: Provider.of<LanguageProvider>(context).locale,
+          // supportedLocales: L10n.all,
+          theme: ThemeData(primarySwatch: Colors.green), //ubah warna appbar
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations
+                .delegate, // support localization string for Material Widget
+            GlobalCupertinoLocalizations
+                .delegate, // support localization string for Cupertino Widget
+            GlobalWidgetsLocalizations
+                .delegate // support localization string for text format from right to left. exp :arab text
+          ],
+          supportedLocales: L10n.all,
+          home: const SplashScreen(),
+        );
+      },
     );
   }
 }
