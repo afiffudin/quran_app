@@ -1,5 +1,6 @@
 {
-    "title": "توطين الرفرفة",
-    "greeting": "{username} مرحبا اسمي ",
-    "invitation_message": "Flutter لنجعل العالم أفضل مع"
+    "title": "قرآني",
+    "greeting": "{username} السلام عليكم ورحمة الله وبركاته، ورب، أحب القرآن",
+    "invitation_message": "لنقرأ ونحفظ القرآن الكريم",
+    "opening": "لنبدأ"
 }

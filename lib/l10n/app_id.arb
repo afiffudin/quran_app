@@ -1,5 +1,9 @@
 {
-    "title": "My Quran",
+    "title": "Alquran ku",
     "greeting": "Assalamualaikum, Wrb, Cinta Alquran {username}",
-    "invitation_message": "Mari mengaji & menghapal Quran"
+    "invitation_message": "Mari mengaji & menghapal Quran",
+      "opening": "Mulai Yukk",
+    "@opening": {
+        "description": "Mulai Yukk"
+    }
 }

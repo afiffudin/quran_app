@@ -1,5 +1,6 @@
 {
-    "title": "Flutterローカリゼーション",
-    "greeting": "こんにちは、私の名前は {username} です",
-    "invitation_message": "Flutterで世界を良くしましょう"
+    "title": "私のコーラン",
+    "greeting": "アッサラーム・アライクム、Wrb、コーランを愛す {username}",
+    "invitation_message": "クルアーンを暗唱しよう",
+    "opening": "始めよう"
 }

@@ -1,9 +1,9 @@
 {
-    "title": "Flutter Localization",
+    "title": "My Quran",
     "@title": {
         "description": "Title for app"
     },
-    "greeting": "Hello, my name is {username}",
+    "greeting": "Assalamualaikum, Wrb, Wb,  Love the Quran {username}",
     "@greeting": {
         "description": "Introducing user",
         "placeholders": {
@@ -12,8 +12,16 @@
             }
         }
     },
-    "invitation_message": "Let's make world better with Flutter",
+    "invitation_message": "Let's recite & memorize the Quran",
     "@invitation_message": {
         "description": "Let's make world better with Flutter"
-    }
+        },
+    "opening": "Lets's start",
+    "@opening": {
+        "description": "Lets's start"
+        },
+    "ayat": "verse",
+    "@ayat": {
+        "description": "verse"
+    }    
 }

@@ -14,10 +14,11 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        //appbar
         title: Text(AppLocalizations.of(context)?.title ?? ''),
         centerTitle: true,
-        leading: LanguageFlagWidget(),
-        actions: [LanguagePickerWidget()],
+        leading: LanguageFlagWidget(), //bendera bahasa
+        actions: [LanguagePickerWidget()], //bahasanya
       ),
       backgroundColor: Color.fromARGB(255, 16, 35, 4),
       body: SafeArea(
@@ -32,7 +33,7 @@ class SplashScreen extends StatelessWidget {
                   AppLocalizations.of(context)?.greeting('') ??
                       'My Quran', //ngambil data dari app_id.arb dll
                   style: GoogleFonts.poppins(
-                    color: Color.fromARGB(255, 250, 3, 3),
+                    color: Color.fromARGB(255, 250, 3, 3), //warna text font
                     fontWeight: FontWeight.bold,
                     fontSize: 28,
                   ),
@@ -76,7 +77,8 @@ class SplashScreen extends StatelessWidget {
                                 color: Color.fromARGB(255, 251, 133, 83),
                                 borderRadius: BorderRadius.circular(30)),
                             child: Text(
-                              'Mulai Yukk',
+                              AppLocalizations.of(context)!.opening ,
+                                  // 'My Quran',
                               style: GoogleFonts.poppins(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,

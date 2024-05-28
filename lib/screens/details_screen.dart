@@ -6,9 +6,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:quran/colors/app_colors.dart';
 import 'package:quran/models/ayat.dart';
 import 'package:quran/models/surah.dart';
+import 'package:quran/provider/language_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailScreen extends StatelessWidget {
   final int noSurat;
@@ -29,6 +32,19 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = Provider.of<LanguageProvider>(context).locale.languageCode;
+    var languageSource = 'ind-indonesianislam';
+
+    if (locale == 'en') {
+      languageSource = 'eng-literal';
+    } else if (locale == 'ja') {
+      languageSource = 'jpn-ryoichimita-la';
+    }
+    if (locale == 'es') {
+      languageSource = 'spa-juliocortes-la';
+    } else if (locale == 'ar') {
+      languageSource = 'ara-quran-la';
+    }
     return FutureBuilder<Surah>(
         future: _getDetailSurah(),
         initialData: null,
@@ -56,8 +72,9 @@ class DetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: ListView.separated(
                   itemBuilder: (context, index) => _ayatItem(
-                      ayat: surah.ayat!
-                          .elementAt(index + (noSurat == 1 ? 1 : 0))),
+                      ayat:
+                          surah.ayat!.elementAt(index + (noSurat == 1 ? 1 : 0)),
+                      lang: languageSource),
                   itemCount: surah.jumlahAyat + (noSurat == 1 ? -1 : 0),
                   separatorBuilder: (context, index) => Container(),
                 ),
@@ -67,7 +84,7 @@ class DetailScreen extends StatelessWidget {
         }));
   }
 
-  Widget _ayatItem({required Ayat ayat}) => Padding(
+  Widget _ayatItem({required Ayat ayat, required String lang}) => Padding(
         padding: const EdgeInsets.only(top: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -128,9 +145,31 @@ class DetailScreen extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            Text(
-              ayat.idn,
-              style: GoogleFonts.poppins(color: text, fontSize: 16),
+            FutureBuilder<Response<dynamic>>(
+              future: Dio().get(
+                  "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/$lang/${ayat.surah}/${ayat.nomor}.json"),
+              builder: (BuildContext context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const CircularProgressIndicator.adaptive();
+                }
+                return Text(
+                  snapshot.data?.data['text'],
+                  style: GoogleFonts.poppins(color: text, fontSize: 16),
+                );
+              },
+              // ),
+              // FutureBuilder<Response<dynamic>>(
+              //   future: Dio().get(
+              //       "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/jpn-ryoichimita-la.json/${ayat.surah}/${ayat.nomor}.json"),
+              //   builder: (BuildContext context, snapshot) {
+              //     if (!snapshot.hasData) {
+              //       return const CircularProgressIndicator.adaptive();
+              //     }
+              //     return Text(
+              //       snapshot.data?.data['text'],
+              //       style: GoogleFonts.poppins(color: text, fontSize: 16),
+              //     );
+              //   },
             )
           ],
         ),
