@@ -77,8 +77,8 @@ class SplashScreen extends StatelessWidget {
                                 color: Color.fromARGB(255, 251, 133, 83),
                                 borderRadius: BorderRadius.circular(30)),
                             child: Text(
-                              AppLocalizations.of(context)!.opening ,
-                                  // 'My Quran',
+                              AppLocalizations.of(context)!.opening,
+                              // 'My Quran',
                               style: GoogleFonts.poppins(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
